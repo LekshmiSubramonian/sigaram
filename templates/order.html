@@ -1,0 +1,186 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Order</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+            font-family: Arial, Helvetica, sans-serif;
+            width: 100%;
+            height: 100%;
+        }
+
+        * {
+            box-sizing: border-box;
+        }
+
+        .navbar {
+            width: 100%;
+            z-index: 10;
+            display: block;
+        }
+
+
+        .navbar-inverse .navbar-nav>li>a {
+            color: white;
+            background-color: transparent;
+            font-size: 20px;
+        }
+
+        .navbar-inverse .navbar-nav>li>a:hover {
+            background-color: transparent;
+            color: lightsalmon;
+        }
+
+        .row {
+            padding-top: 25px;
+            padding-bottom: 20px;
+            width: 100%;
+            margin: auto;
+            overflow: hidden;
+        }
+
+        .container {
+            position: relative;
+            top: 100px;
+            display: flex-box;
+            width: 100%;
+            height: 100%;
+            margin: auto;
+            left: auto;
+            justify-content: center;
+            align-items: center;
+            justify-items: center;
+        }
+
+        .section {
+            flex: 1;
+            margin: auto;
+            border: 3px solid black;
+            border-radius: 20px;
+            width: 495px;
+            max-width: 100%;
+            height: 500px;
+            float: left;
+            align-items: center;
+            justify-content: center;
+        }
+
+        #photo img {
+            width: 100%;
+            height: 100%;
+            border-radius: 20px;
+
+        }
+
+        #caption1,
+        #caption2 {
+            padding: 30px;
+        }
+
+        #hide {
+            display: none;
+        }
+
+        .section input[type=text],
+        input[type=email],
+        input[type=number] {
+            outline: none;
+            border: none;
+            background: transparent;
+            border-bottom: 1px solid;
+            width: 100%;
+        }
+
+        .btn {
+            width: 100%;
+            margin-top: 70px;
+            margin-bottom: 30px;
+            background: #4CAF50;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            cursor: pointer;
+            padding: 10px 32px;
+
+        }
+
+        .section input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom:0;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/home"><img src="/static/images/logo.png" class="navbar-fixed-top" id="resimg" width="50px"
+                        height="50px"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="/contact">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <div class="container">
+        {% for prdt in prdts%}
+        <div class="row">
+            <div class="section" id="photo">
+                <img src="{{prdt.image.url}}" alt="alt">
+            </div>
+            <div class="section" id="caption1">
+                <h1>Sale</h1><br>
+                <h4>Details:</h4><br>
+                <p id="open">
+                    Property Type: {{prdt.types}}<br><br>
+                    District: {{prdt.dist}}<br><br>
+                    Thaluk: {{prdt.thaluk}}<br><br>
+                    Address: {{prdt.add}}<br><br>
+                    Description: {{prdt.desc}}<br><br>
+                    Estimated amount: {{prdt.amt}}<br>
+                </p>
+            </div>
+            <div class="section" id="caption2">
+                <p style="font-weight: bolder;">Fill your details and click confirm to get this property!</p><br><br>
+                <form method="post" action="/thankyou" enctype="multipart/form-data" autocomplete="off">
+                    {% csrf_token %}
+                    <input type="text" value={{prdt.name}} name="ownname" id="hide">
+                    <input type="text" value={{prdt.phone}} name="ownphone" id="hide">
+                    <input type="text" value={{prdt.email}} name="ownmail" id="hide">
+                    <input type="text" value={{prdt.image}} name="ownimage" id="hide">
+                    <p>Your name</p>
+                    <input type="text" name="cusname" id="cusname" placeholder="Your name" required><br><br>
+                    <p>Your phone number</p>
+                    <input type="number" name="cusphn" id="cusphn" placeholder="Valid Phone Number" required><br><br
+                        <p>Your email address</p>
+                    <input type="email" name="cusmail" id="cusmail" placeholder="Valid Email address" required><br>
+                    <button class="btn btn-success" type="submit">Confirm</button>
+                </form>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</body>
+
+</html>

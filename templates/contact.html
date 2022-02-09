@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/css/bootstrap.min.css">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.4.1/js/bootstrap.min.js"></script>
+    <title>ContactUS</title>
+    <style>
+        body {
+            background-image: linear-gradient(rgba(0, 0, 0, 0.2), rgba(0, 0, 0, 0.2));
+            font-family: Arial, Helvetica, sans-serif;
+            width: 100vw;
+            height: 100vh;
+
+        }
+
+        .navbar {
+            width: 100%;
+            z-index: 10;
+
+        }
+
+
+        .navbar-inverse .navbar-nav>li>a {
+            color: white;
+            background-color: transparent;
+            font-size: 20px;
+        }
+
+        .navbar-inverse .navbar-nav>li>a:hover {
+            background-color: transparent;
+            color: lightsalmon;
+        }
+
+        .row {
+            position: fixed;
+            left: 0;
+            width: 100%;
+        }
+
+        .column {
+            float: left;
+            height: 100vh;
+            width: 50%;
+        }
+
+        #right {
+            margin: auto;
+            padding-top: 100px;
+            padding-right: 50px;
+            font-weight: bold;
+        }
+
+        .form-container input[type=text],
+        input[type=email],
+        input[type=number] {
+            outline: none;
+            border: none;
+            background: transparent;
+            border-bottom: 1px solid;
+            width: 100%;
+        }
+
+        .form-container textarea {
+            width: 100%;
+        }
+
+        .form-container input[type=number]::-webkit-outer-spin-button,
+        input[type=number]::-webkit-inner-spin-button {
+            -webkit-appearance: none;
+
+        }
+
+
+        .form-container input[type=submit] {
+            width: 100%;
+            margin-top: 40px;
+            margin-bottom: 30px;
+            background: #4CAF50;
+            border: none;
+            text-align: center;
+            text-decoration: none;
+            display: inline-block;
+            font-size: 16px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 10px 32px;
+
+        }
+    </style>
+</head>
+
+<body>
+    <nav class="navbar navbar-inverse navbar-fixed-top" style="margin-bottom:0;">
+        <div class="container-fluid">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#collapse">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="/home"><img src="/media/images/logo.png" class="navbar-fixed-top" id="resimg" width="50px"
+                        height="50px"></a>
+            </div>
+            <div class="collapse navbar-collapse" id="collapse">
+                <ul class="nav navbar-nav navbar-right">
+                    <li><a href="/home">Home</a></li>
+                    <li><a href="/about">About</a></li>
+                    <li><a href="">Contact</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="row">
+            <div class="column" id="left">
+                <img src="/static/images/contact.jpg" height="100%" width="90%">
+            </div>
+            <div class="column" id="right">
+                <h1>Contact Us</h1><br><br>
+                <div class="form-container">
+                    <form method="post" action="/thankyou" enctype="multipart/form-data" autocomplete="off">
+                        {% csrf_token %}
+                        <p>Your Name</p>
+                        <input type="text" id="username" name="username" placeholder="Your name here"
+                            required /><br><br>
+                        <p>Phone Number</p>
+                        <input type="number" id="phone" name="phone" placeholder="Valid phone number"
+                            required /><br><br>
+                        <p>Email Address</p>
+                        <input type="email" id="email" name="email" placeholder="Valid email address"
+                            required /><br><br>
+                        <p>Your Query</p>
+                        <textarea rows="5" cols="50" id="desc" name="desc" placeholder="Give your query here!"
+                            prequired></textarea>
+                        <input type="submit" value="Send" />
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>

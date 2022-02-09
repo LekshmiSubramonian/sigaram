@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sale</title>
+</head>
+<style>
+    body {
+        height: 100%;
+        width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 25px;
+
+        background: rgba(0, 0, 0, 0.6);
+
+    }
+
+    * {
+        box-sizing: border-box;
+    }
+
+
+
+    .form-container input[type=text],
+    input[type=email],
+    input[type=number] {
+        outline: none;
+        border: none;
+        background: transparent;
+        border-bottom: 1px solid;
+        width: 100%;
+    }
+
+    .form-container textarea {
+        width: 100%;
+    }
+
+
+    .form-container input[type=submit] {
+        width: 100%;
+        margin-top: 70px;
+        margin-bottom: 30px;
+        background: #4CAF50;
+        border: none;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        font-weight: bold;
+        cursor: pointer;
+        padding: 10px 32px;
+
+    }
+
+    .form-container input[type=number]::-webkit-outer-spin-button,
+    input[type=number]::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+
+    }
+
+    .row {
+        width: 100%;
+        top: 7%;
+        padding: 0;
+        margin: auto;
+        overflow: hidden;
+    }
+
+
+    .container {
+        margin: auto;
+        position: relative;
+        top: 15%;
+        max-width: 700px;
+        max-height: 2000px;
+        padding: 10px 26px;
+        background: white;
+
+    }
+
+    input[type="file"] {
+        display: none;
+    }
+
+    .custom-file-upload {
+        border: 1px solid black;
+        border-radius: 25px;
+        width: 100%;
+        text-align: center;
+        display: inline-block;
+        padding: 6px 12px;
+        cursor: pointer;
+        font-size: 15px;
+        background-color: #002e48;
+        color: white;
+    }
+
+    .custom-file-upload:hover {
+        background-color: white;
+        color: black;
+    }
+
+    #uploadFile,
+    #uploadVdo {
+        outline: none;
+        width: 100%;
+        border: none;
+    }
+</style>
+
+
+
+<body>
+    <div class="row">
+        <div class="container">
+            <center>
+                <h1>Register for Sale</h1>
+                <h3>Please fill the form to create an entry!</h3>
+            </center>
+            <div class="form-container">
+                <form action='/thankyou' method="post" enctype="multipart/form-data" autocomplete="off">
+                    {% csrf_token %}
+                    <p>Type of property</p>
+                    <input type="text" id="house-type" name="types" placeholder="House/Godown/Land" required />
+                    <p>District</p>
+                    <input type="text" id="dist" name="dist" placeholder="Enter district" required />
+                    <p>Thaluk</p>
+                    <input type="text" id="thaluk" name="thaluk" placeholder="Enter Thaluk" required />
+                    <p>Address</p>
+                    <input type="text" id="add" name="add" placeholder="Enter full address" required />
+                    <p>Owner Name</p>
+                    <input type="text" id="name" name="name" placeholder="Enter owner name" required />
+                    <p>Owner Phone Number</p>
+                    <input type="number" id="phone" name="phone" placeholder="Enter valid phone number" required />
+                    <p>Email Address</p>
+                    <input type="email" id="email" name="email" placeholder="Enter valid email address" required />
+                    <p>Estimate</p>
+                    <input type="number" id="amt" name="amt" placeholder="Enter amount for sale" required />
+                    <p>Description</p>
+                    <textarea rows="5" cols="50" id="desc" name="desc" placeholder="Give your description here!"
+                        prequired></textarea>
+                    <p>Upload Image</p>
+                    <label for="image" class="custom-file-upload">
+                        choose file
+                    </label>
+                    <input type="file" class="form-control" id="image" name="image" onchange="filename();"
+                        accept="image/*" required />
+                    <input id="uploadFile" placeholder="No file chosen" disabled="disabled" />
+                    <script>
+                        function filename() {
+                            var namefile = document.getElementById("image").files[0].name;
+                            document.getElementById("uploadFile").value = namefile;
+                        };
+
+                    </script>
+                    <p>Upload Video</p>
+                    <label for="vdo" class="custom-file-upload">
+                        choose file
+                    </label>
+                    <input type="file" id="vdo" name="video" onchange="vdoname();" accept="video/*" required />
+                    <input id="uploadVdo" placeholder="No file chosen" disabled="disabled" />
+                    <script>
+                        function vdoname() {
+                            var namefile = document.getElementById("vdo").files[0].name;
+                            document.getElementById("uploadVdo").value = namefile;
+                        };
+
+                    </script>
+                    <input type="submit" value="submit" />
+                </form>
+            </div>
+        </div>
+    </div>
+</body>
+
+</html>
